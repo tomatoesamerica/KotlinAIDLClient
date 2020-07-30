@@ -42,12 +42,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initConection() {
-        iRemoteService?.let {
+
             val intent = Intent(aidl::class.java.name)
             intent.action = SERVER_ACTION
             intent.setPackage(SERVER_URI)
             bindService(intent, mConnection, Context.BIND_AUTO_CREATE)
-        }
+
     }
 
     override fun onStart() {
@@ -66,20 +66,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        btn_sum.setOnClickListener(View.OnClickListener {
-            iRemoteService?.let {
-                Log.d(TAG, "sssssssss")
-                if (edt_number_one.length() > 0 && edt_number_tow.length() > 0) {
-                    Log.d(TAG, "sssssssss")
-                    tv_result.setText(
-                        iRemoteService!!.sum(
-                            edt_number_one.text.toString().toInt(),
-                            edt_number_tow.text.toString().toInt()
-                        ).toString()
-                    )
-                }
-            }
-        })
+//        btn_sum.setOnClickListener(View.OnClickListener {
+//            iRemoteService?.let {
+//                Log.d(TAG, "sssssssss")
+//                if (edt_number_one.length() > 0 && edt_number_tow.length() > 0) {
+//                    Log.d(TAG, "sssssssss")
+//                    tv_result.setText(
+//                        iRemoteService!!.sum(
+//                            edt_number_one.text.toString().toInt(),
+//                            edt_number_tow.text.toString().toInt()
+//                        ).toString()
+//                    )
+//                }
+//            }
+//        })
 
+    }
+
+    fun sum(view: View) {
+        iRemoteService?.let {
+            Log.d(TAG, "sssssssss")
+            if (edt_number_one.length() > 0 && edt_number_tow.length() > 0) {
+                Log.d(TAG, "sssssssss")
+                tv_result.setText(
+                    iRemoteService!!.sum(
+                        edt_number_one.text.toString().toInt(),
+                        edt_number_tow.text.toString().toInt()
+                    ).toString()
+                )
+            }
+        }
     }
 }
